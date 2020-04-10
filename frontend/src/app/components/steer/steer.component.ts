@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, Output } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, Output, Input } from '@angular/core';
 import { NgJoystickComponent } from 'ng-joystick';
 import { Vector2 } from 'src/app/models/vector2';
 import { Observable } from 'rxjs';
@@ -12,6 +12,8 @@ import { map, merge } from "rxjs/operators";
 export class SteerComponent implements OnInit, AfterViewInit {
   @ViewChild('joystick') joyStick: NgJoystickComponent;
   @Output() steer$: Observable<Vector2>;
+  @Input() steerPosition: { left: number, top: number };
+
   constructor() { }
 
   ngAfterViewInit(): void {

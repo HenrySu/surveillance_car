@@ -6,12 +6,14 @@ import { MaterialModule } from './material';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NgJoystickModule } from "ng-joystick";
 import { SteerComponent } from './components/steer/steer.component';
+import { ControlDeskComponent } from './components/control-desk/control-desk.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    SteerComponent
+    SteerComponent,
+    ControlDeskComponent
   ],
   imports: [
     BrowserModule,
