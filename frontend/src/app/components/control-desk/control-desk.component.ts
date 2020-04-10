@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { SteerComponent } from '../steer/steer.component';
 import { Subscription } from 'rxjs';
+import { CarService, CameraService } from 'src/app/services';
 
 @Component({
   selector: 'app-control-desk',
@@ -12,7 +13,9 @@ export class ControlDeskComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild("cameraSteer") cameraSteer: SteerComponent;
   private subscriptions: Subscription[] = [];
 
-  constructor() { }
+  constructor(private carSvc: CarService,
+    private cameraSvc: CameraService) { }
+    
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
