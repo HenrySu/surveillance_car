@@ -17,7 +17,7 @@ export class SteerComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.steer$ = this.joyStick.joystickMove$.pipe(
       map(move => new Vector2(this.normalizeAngle(move.angle.radian), move.force)),
-      merge(this.joyStick.joystickRelease$.pipe(map(_ => new Vector2)))
+      merge(this.joyStick.joystickRelease$.pipe(map(_ => new Vector2())))
     );
   }
 
