@@ -10,7 +10,7 @@ import { map, merge } from "rxjs/operators";
   styleUrls: ['./steer.component.scss']
 })
 export class SteerComponent implements OnInit, AfterViewInit {
-  @ViewChild('joystick') joyStick: NgJoystickComponent;
+  @ViewChild('joystick') private joyStick: NgJoystickComponent;
   @Output() steer$: Observable<Vector2>;
   @Input() steerPosition: { left: number, top: number };
 
