@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, Output } from '@angular/co
 import { NgJoystickComponent } from 'ng-joystick';
 import { Vector2 } from 'src/app/models/vector2';
 import { Observable } from 'rxjs';
+import { map, merge } from "rxjs/operators";
 
 @Component({
   selector: 'app-steer',
@@ -14,8 +15,10 @@ export class SteerComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngAfterViewInit(): void {
-    this.joyStick.joystickMove$.subscribe(x => console.log(new Vector2(this.normalizeAngle(x.angle.radian), x.force)));
-    this.joyStick.joystickRelease$.subscribe(x => console.log(new Vector2()));
+    this.steer$ = this.joyStick.joystickMove$.pipe(
+      map(move => new Vector2(this.normalizeAngle(move.angle.radian), move.force)),
+      merge(this.joyStick.joystickRelease$.pipe(map(_ => new Vector2)))
+    );
   }
 
   normalizeAngle(angle: number): number {
