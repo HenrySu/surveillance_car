@@ -5,11 +5,13 @@ import { AppComponent } from './components/app/app.component';
 import { MaterialModule } from './material';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NgJoystickModule } from "ng-joystick";
+import { MotionComponent } from './components/motion/motion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent
+    DashboardComponent,
+    MotionComponent
   ],
   imports: [
     BrowserModule,
