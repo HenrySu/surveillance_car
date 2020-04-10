@@ -9,7 +9,7 @@ import { map, merge } from "rxjs/operators";
   templateUrl: './steer.component.html',
   styleUrls: ['./steer.component.scss']
 })
-export class SteerComponent implements OnInit, AfterViewInit {
+export class SteerComponent implements AfterViewInit {
   @ViewChild('joystick') private joyStick: NgJoystickComponent;
   @Output() steer$: Observable<Vector2>;
   @Input() steerPosition: { left: number, top: number };
@@ -26,9 +26,4 @@ export class SteerComponent implements OnInit, AfterViewInit {
   normalizeAngle(angle: number): number {
     return Math.PI * 2 - (angle + Math.PI / 2 * 3) % (Math.PI * 2)
   }
-
-
-  ngOnInit(): void {
-  }
-
 }

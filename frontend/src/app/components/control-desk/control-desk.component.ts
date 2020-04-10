@@ -8,14 +8,14 @@ import { CarService, CameraService } from 'src/app/services';
   templateUrl: './control-desk.component.html',
   styleUrls: ['./control-desk.component.scss']
 })
-export class ControlDeskComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ControlDeskComponent implements OnDestroy, AfterViewInit {
   @ViewChild("carSteer") carSteer: SteerComponent;
   @ViewChild("cameraSteer") cameraSteer: SteerComponent;
   private subscriptions: Subscription[] = [];
 
   constructor(private carSvc: CarService,
     private cameraSvc: CameraService) { }
-    
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
@@ -26,8 +26,4 @@ export class ControlDeskComponent implements OnInit, OnDestroy, AfterViewInit {
       this.cameraSteer.steer$.subscribe(x => console.log(`camera`)),
     );
   }
-
-  ngOnInit(): void {
-  }
-
 }
