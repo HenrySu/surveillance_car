@@ -36,8 +36,6 @@ export class JoystickComponent implements OnInit, AfterViewInit {
         endWith(new Vector2(0, 0)//the stop vector
         )))
     );
-
-    this.joystickPositionPercentageVector$.subscribe(x => console.log(x));
   }
 
   private getPercentageVector(event: PointerEvent): Vector2 {
