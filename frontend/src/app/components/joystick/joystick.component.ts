@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit, Output } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit, Output, OnDestroy } from '@angular/core';
 import { fromEvent, merge, Observable } from 'rxjs';
 import { skipUntil, takeWhile, takeUntil, mergeMap, map, tap, switchMap, switchMapTo, throttleTime, endWith } from 'rxjs/operators';
 import { JoystickPosition, Vector2 } from 'src/app/models';
@@ -8,18 +8,24 @@ import { JoystickPosition, Vector2 } from 'src/app/models';
   templateUrl: './joystick.component.html',
   styleUrls: ['./joystick.component.scss']
 })
-export class JoystickComponent implements OnInit, AfterViewInit {
+export class JoystickComponent implements AfterViewInit, OnDestroy {
   @ViewChild("joystickHandle") private joystickHandleElement: ElementRef;
   @Output() public joystickPositionPercentageVector$: Observable<Vector2>;
   joystickStart$: Observable<PointerEvent>;
   joystickStop$: Observable<Event>;
+  unSubscribeVector: any;
   private get handleElement() {
     return this.joystickHandleElement.nativeElement;
   }
-
-  constructor(private render: Renderer2) { }
+  
   private joystickWidth: number;
   private joystickHeight: number;
+
+  constructor(private render: Renderer2) { }
+  ngOnDestroy(): void {
+    this.unSubscribeVector();
+  }
+
   ngAfterViewInit(): void {
     [this.joystickWidth, this.joystickHeight] = [this.handleElement.offsetWidth, this.handleElement.offsetHeight];
 
@@ -36,6 +42,8 @@ export class JoystickComponent implements OnInit, AfterViewInit {
         endWith(new Vector2(0, 0)//the stop vector
         )))
     );
+
+    this.unSubscribeVector = this.joystickPositionPercentageVector$.subscribe(vector => this.updateJoystickHandlePosition(vector));
   }
 
   private getPercentageVector(event: PointerEvent): Vector2 {
@@ -53,8 +61,7 @@ export class JoystickComponent implements OnInit, AfterViewInit {
     return event;
   }
 
-  ngOnInit(): void {
+  private updateJoystickHandlePosition(vector:Vector2):void{
+
   }
-
-
 }
