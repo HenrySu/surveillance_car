@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit, Output } from '@angular/core';
 import { fromEvent, merge, Observable } from 'rxjs';
-import { skipUntil, takeWhile, takeUntil, mergeMap, map, tap, switchMap, switchMapTo, throttleTime } from 'rxjs/operators';
+import { skipUntil, takeWhile, takeUntil, mergeMap, map, tap, switchMap, switchMapTo, throttleTime, endWith } from 'rxjs/operators';
 import { JoystickPosition, Vector2 } from 'src/app/models';
 
 @Component({
@@ -13,8 +13,6 @@ export class JoystickComponent implements OnInit, AfterViewInit {
   @Output() public joystickPositionPercentageVector$: Observable<Vector2>;
   joystickStart$: Observable<PointerEvent>;
   joystickStop$: Observable<Event>;
-  joystickMove$: Observable<PointerEvent>;
-  joystickDrag$: Observable<PointerEvent>;
   private get handleElement() {
     return this.joystickHandleElement.nativeElement;
   }
@@ -30,12 +28,15 @@ export class JoystickComponent implements OnInit, AfterViewInit {
       this.getEventStream(document, "pointerup"),
       this.getEventStream(document, "pointercancel")
     );
-    this.joystickMove$ = this.getEventStream<PointerEvent>(this.handleElement, "pointermove");
-    this.joystickDrag$ = this.joystickStart$.pipe(
-      switchMapTo(this.joystickMove$.pipe(takeUntil(this.joystickStop$)))
+    const joystickVector$ = this.getEventStream<PointerEvent>(this.handleElement, "pointermove")
+      .pipe(map(event => this.getPercentageVector(event)));
+    this.joystickPositionPercentageVector$ = this.joystickStart$.pipe(
+      switchMapTo(joystickVector$.pipe(
+        takeUntil(this.joystickStop$),
+        endWith(new Vector2(0, 0)//the stop vector
+        )))
     );
 
-    this.joystickPositionPercentageVector$ = this.joystickDrag$.pipe(map(event => this.getPercentageVector(event)));
     this.joystickPositionPercentageVector$.subscribe(x => console.log(x));
   }
 
