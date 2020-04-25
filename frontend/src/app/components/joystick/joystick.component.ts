@@ -14,7 +14,7 @@ export class JoystickComponent implements OnInit, AfterViewInit {
   joystickStop$: Observable<Event>;
   joystickMove$: Observable<PointerEvent>;
   joystickDrag$: Observable<PointerEvent>;
-  private get HandleElement() {
+  private get handleElement() {
     return this.joystickHandleElement.nativeElement;
   }
 
@@ -22,22 +22,22 @@ export class JoystickComponent implements OnInit, AfterViewInit {
   private neutralPosition:JoystickPosition;
   ngAfterViewInit(): void {
     this.neutralPosition = {
-      x: this.HandleElement.offsetLeft + this.HandleElement.offsetWidth/2,
-      y: this.HandleElement.offsetTop + this.HandleElement.offsetHeight/2,
+      x: this.handleElement.offsetLeft + this.handleElement.offsetWidth/2,
+      y: this.handleElement.offsetTop + this.handleElement.offsetHeight/2,
     };
     console.log(this.neutralPosition)
-    this.joystickStart$ = this.getEventStream(this.HandleElement, "pointerdown");
+    this.joystickStart$ = this.getEventStream(this.handleElement, "pointerdown");
     this.joystickStop$ = merge(
       this.getEventStream(document, "pointerup"),
       this.getEventStream(document, "pointercancel")
     );
-    this.joystickMove$ = this.getEventStream<PointerEvent>(this.HandleElement, "pointermove").pipe(throttleTime(200));
+    this.joystickMove$ = this.getEventStream<PointerEvent>(this.handleElement, "pointermove").pipe(throttleTime(200));
     this.joystickDrag$ = this.joystickStart$.pipe(
       switchMapTo(this.joystickMove$.pipe(takeUntil(this.joystickStop$)))
     );
 
-    this.joystickDrag$.subscribe(x => console.log(x.clientX));
-    console.log(this.HandleElement.offsetLeft, this.HandleElement.offsetWidth)
+    this.joystickDrag$.subscribe(x => console.log(x.clientX, x.pageX));
+    console.log(this.handleElement.offsetLeft, this.handleElement.offsetWidth)
   }
 
   private getEventStream<T extends Event>(nativeElement: any, eventName: string): Observable<T> {
