@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 import { fromEvent, merge, Observable } from 'rxjs';
-import { skipUntil, takeWhile, takeUntil, mergeMap, map, tap } from 'rxjs/operators';
+import { skipUntil, takeWhile, takeUntil, mergeMap, map, tap, switchMap, switchMapTo } from 'rxjs/operators';
 
 @Component({
   selector: 'app-joystick',
@@ -10,7 +10,7 @@ import { skipUntil, takeWhile, takeUntil, mergeMap, map, tap } from 'rxjs/operat
 export class JoystickComponent implements OnInit, AfterViewInit {
   @ViewChild("joystickHandle") private joystickHandleElement: ElementRef;
   joystickStart$: Observable<PointerEvent>;
-  joystickStop$: Observable<PointerEvent>;
+  joystickStop$: Observable<Event>;
   joystickMove$: Observable<PointerEvent>;
   joystickDrag$: Observable<PointerEvent>;
   // joystickMove$: Observable<PointerEvent>;
@@ -22,10 +22,13 @@ export class JoystickComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.joystickStart$ = this.getEventStream(this.HandleElement, "pointerdown");
-    this.joystickStop$ = this.getEventStream(document, "pointerup");
+    this.joystickStop$ = merge(
+      this.getEventStream(document, "pointerup"),
+      this.getEventStream(document, "pointercancel")
+    );
     this.joystickMove$ = this.getEventStream(this.HandleElement, "pointermove");
     this.joystickDrag$ = this.joystickStart$.pipe(
-      mergeMap(_ => this.joystickMove$.pipe(takeUntil(this.joystickStop$)))
+      switchMapTo(this.joystickMove$.pipe(takeUntil(this.joystickStop$)))
     );
 
     this.joystickDrag$.subscribe(x => console.log(x.pageX))
