@@ -22,14 +22,13 @@ export class JoystickComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.joystickStart$ = this.getEventStream(this.HandleElement, "pointerdown");
-    this.joystickStop$ = this.getEventStream(this.HandleElement, "pointerup");
+    this.joystickStop$ = this.getEventStream(document, "pointerup");
     this.joystickMove$ = this.getEventStream(this.HandleElement, "pointermove");
-
     this.joystickDrag$ = this.joystickStart$.pipe(
       mergeMap(_ => this.joystickMove$.pipe(takeUntil(this.joystickStop$)))
     );
 
-    this.joystickDrag$.subscribe(x => console.log(x))
+    this.joystickDrag$.subscribe(x => console.log(x.pageX))
   }
 
   private getEventStream<T extends Event>(nativeElement: any, eventName: string): Observable<T> {
