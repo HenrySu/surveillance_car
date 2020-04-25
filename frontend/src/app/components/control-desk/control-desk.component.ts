@@ -21,9 +21,9 @@ export class ControlDeskComponent implements OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.subscriptions.push(
-      this.carSteer.steer$.subscribe(x => console.log(`car`)),
-      this.cameraSteer.steer$.subscribe(x => console.log(`camera`)),
-    );
+    // this.subscriptions.push(
+    //   this.carSteer.steer$.subscribe(x => console.log(`car`)),
+    //   this.cameraSteer.steer$.subscribe(x => console.log(`camera`)),
+    // );
   }
 }

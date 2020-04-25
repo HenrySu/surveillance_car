@@ -8,6 +8,7 @@ import { NgJoystickModule } from "ng-joystick";
 import { SteerComponent } from './components/steer/steer.component';
 import { ControlDeskComponent } from './components/control-desk/control-desk.component';
 import { MonitorComponent } from './components/monitor/monitor.component';
+import { JoystickComponent } from './components/joystick/joystick.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { MonitorComponent } from './components/monitor/monitor.component';
     DashboardComponent,
     SteerComponent,
     ControlDeskComponent,
-    MonitorComponent
+    MonitorComponent,
+    JoystickComponent
   ],
   imports: [
     BrowserModule,
