@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit } from '@angular/core';
 import { fromEvent, merge, Observable } from 'rxjs';
 import { skipUntil, takeWhile, takeUntil, mergeMap, map, tap, switchMap, switchMapTo, throttleTime } from 'rxjs/operators';
+import { JoystickPosition } from 'src/app/models';
 
 @Component({
   selector: 'app-joystick',
@@ -13,14 +14,18 @@ export class JoystickComponent implements OnInit, AfterViewInit {
   joystickStop$: Observable<Event>;
   joystickMove$: Observable<PointerEvent>;
   joystickDrag$: Observable<PointerEvent>;
-  // joystickMove$: Observable<PointerEvent>;
   private get HandleElement() {
     return this.joystickHandleElement.nativeElement;
   }
 
   constructor(private render: Renderer2) { }
-
+  private neutralPosition:JoystickPosition;
   ngAfterViewInit(): void {
+    this.neutralPosition = {
+      x: this.HandleElement.offsetLeft + this.HandleElement.offsetWidth/2,
+      y: this.HandleElement.offsetTop + this.HandleElement.offsetHeight/2,
+    };
+    console.log(this.neutralPosition)
     this.joystickStart$ = this.getEventStream(this.HandleElement, "pointerdown");
     this.joystickStop$ = merge(
       this.getEventStream(document, "pointerup"),
@@ -31,7 +36,8 @@ export class JoystickComponent implements OnInit, AfterViewInit {
       switchMapTo(this.joystickMove$.pipe(takeUntil(this.joystickStop$)))
     );
 
-    this.joystickDrag$.subscribe(x => console.log(x.pageX))
+    this.joystickDrag$.subscribe(x => console.log(x.clientX));
+    console.log(this.HandleElement.offsetLeft, this.HandleElement.offsetWidth)
   }
 
   private getEventStream<T extends Event>(nativeElement: any, eventName: string): Observable<T> {
