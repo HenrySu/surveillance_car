@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit, Output, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, Output, Renderer2, ViewChild, RendererStyleFlags2 } from '@angular/core';
 import { fromEvent, merge, Observable } from 'rxjs';
-import { skipUntil, takeWhile, takeUntil, mergeMap, map, tap, switchMap, switchMapTo, throttleTime, endWith } from 'rxjs/operators';
-import { JoystickPosition, Vector2 } from 'src/app/models';
+import { endWith, map, switchMapTo, takeUntil } from 'rxjs/operators';
+import { Vector2 } from 'src/app/models';
 
 @Component({
   selector: 'app-joystick',
@@ -17,9 +17,11 @@ export class JoystickComponent implements AfterViewInit, OnDestroy {
   private get handleElement() {
     return this.joystickHandleElement.nativeElement;
   }
-  
+
   private joystickWidth: number;
   private joystickHeight: number;
+  private joystickInitialLeft: number;
+  private joystickInitialTop: number;
 
   constructor(private render: Renderer2) { }
   ngOnDestroy(): void {
@@ -27,7 +29,12 @@ export class JoystickComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    [this.joystickWidth, this.joystickHeight] = [this.handleElement.offsetWidth, this.handleElement.offsetHeight];
+    ({
+      offsetWidth: this.joystickWidth,
+      offsetHeight: this.joystickHeight,
+      offsetLeft: this.joystickInitialLeft,
+      offsetTop: this.joystickInitialTop
+    } = this.handleElement);
 
     this.joystickStart$ = this.getEventStream(this.handleElement, "pointerdown");
     this.joystickStop$ = merge(
@@ -61,7 +68,11 @@ export class JoystickComponent implements AfterViewInit, OnDestroy {
     return event;
   }
 
-  private updateJoystickHandlePosition(vector:Vector2):void{
-
+  private updateJoystickHandlePosition(vector: Vector2): void {
+    const left = vector.x * this.joystickWidth / 2 + this.joystickInitialLeft;
+    const top = -vector.y * this.joystickHeight / 2 + this.joystickInitialTop;
+    console.log(this.joystickInitialLeft, left, this.joystickInitialTop, top)
+    this.render.setStyle(this.handleElement, "left", `${left}px`);
+    this.render.setStyle(this.handleElement, "top", `${top}px`);
   }
 }
