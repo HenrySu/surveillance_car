@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
-import { SteerComponent } from '../steer/steer.component';
+import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { CarService, CameraService } from 'src/app/services';
+import { CameraService, CarService } from 'src/app/services';
+import { JoystickComponent } from '../joystick/joystick.component';
 
 @Component({
   selector: 'app-control-desk',
@@ -9,8 +9,8 @@ import { CarService, CameraService } from 'src/app/services';
   styleUrls: ['./control-desk.component.scss']
 })
 export class ControlDeskComponent implements OnDestroy, AfterViewInit {
-  @ViewChild("carSteer") carSteer: SteerComponent;
-  @ViewChild("cameraSteer") cameraSteer: SteerComponent;
+  @ViewChild("carSteer") carSteer: JoystickComponent;
+  @ViewChild("cameraSteer") cameraSteer: JoystickComponent;
   private subscriptions: Subscription[] = [];
 
   constructor(private carSvc: CarService,
@@ -21,9 +21,9 @@ export class ControlDeskComponent implements OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // this.subscriptions.push(
-    //   this.carSteer.steer$.subscribe(x => console.log(`car`)),
-    //   this.cameraSteer.steer$.subscribe(x => console.log(`camera`)),
-    // );
+    this.subscriptions.push(
+      this.carSteer.joystickPositionPercentageVector$.subscribe(x => console.log(`car`)),
+      this.cameraSteer.joystickPositionPercentageVector$.subscribe(x => console.log(`camera`)),
+    );
   }
 }

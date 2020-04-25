@@ -11,9 +11,7 @@ import { Vector2 } from 'src/app/models';
 export class JoystickComponent implements AfterViewInit, OnDestroy {
   @ViewChild("joystickHandle") private joystickHandleElement: ElementRef;
   @Output() public joystickPositionPercentageVector$: Observable<Vector2>;
-  joystickStart$: Observable<PointerEvent>;
-  joystickStop$: Observable<Event>;
-  unSubscribeVector: any;
+  private unSubscribeVector: any;
   private get handleElement() {
     return this.joystickHandleElement.nativeElement;
   }
@@ -36,16 +34,16 @@ export class JoystickComponent implements AfterViewInit, OnDestroy {
       offsetTop: this.joystickInitialTop
     } = this.handleElement);
 
-    this.joystickStart$ = this.getEventStream(this.handleElement, "pointerdown");
-    this.joystickStop$ = merge(
+    const joystickStart$ = this.getEventStream(this.handleElement, "pointerdown");
+    const joystickStop$ = merge(
       this.getEventStream(document, "pointerup"),
       this.getEventStream(document, "pointercancel")
     );
     const joystickVector$ = this.getEventStream<PointerEvent>(this.handleElement, "pointermove")
       .pipe(map(event => this.getPercentageVector(event)));
-    this.joystickPositionPercentageVector$ = this.joystickStart$.pipe(
+    this.joystickPositionPercentageVector$ = joystickStart$.pipe(
       switchMapTo(joystickVector$.pipe(
-        takeUntil(this.joystickStop$),
+        takeUntil(joystickStop$),
         endWith(new Vector2(0, 0)//the stop vector
         )))
     );
@@ -71,7 +69,6 @@ export class JoystickComponent implements AfterViewInit, OnDestroy {
   private updateJoystickHandlePosition(vector: Vector2): void {
     const left = vector.x * this.joystickWidth / 2.5 + this.joystickInitialLeft;
     const top = -vector.y * this.joystickHeight / 2.5 + this.joystickInitialTop;
-    console.log(this.joystickInitialLeft, left, vector.x)
     this.render.setStyle(this.handleElement, "left", `${left}px`);
     this.render.setStyle(this.handleElement, "top", `${top}px`);
   }
