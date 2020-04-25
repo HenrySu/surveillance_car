@@ -69,9 +69,9 @@ export class JoystickComponent implements AfterViewInit, OnDestroy {
   }
 
   private updateJoystickHandlePosition(vector: Vector2): void {
-    const left = vector.x * this.joystickWidth / 2 + this.joystickInitialLeft;
-    const top = -vector.y * this.joystickHeight / 2 + this.joystickInitialTop;
-    console.log(this.joystickInitialLeft, left, this.joystickInitialTop, top)
+    const left = vector.x * this.joystickWidth / 2.5 + this.joystickInitialLeft;
+    const top = -vector.y * this.joystickHeight / 2.5 + this.joystickInitialTop;
+    console.log(this.joystickInitialLeft, left, vector.x)
     this.render.setStyle(this.handleElement, "left", `${left}px`);
     this.render.setStyle(this.handleElement, "top", `${top}px`);
   }
