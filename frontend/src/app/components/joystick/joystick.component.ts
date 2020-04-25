@@ -32,8 +32,8 @@ export class JoystickComponent implements OnInit, AfterViewInit {
     this.joystickDrag$.subscribe(x => console.log(x))
   }
 
-  private getEventStream(nativeElement: any, eventName: string): Observable<PointerEvent> {
-    return <Observable<PointerEvent>>fromEvent(nativeElement, eventName)
+  private getEventStream<T extends Event>(nativeElement: any, eventName: string): Observable<T> {
+    return <Observable<T>>fromEvent(nativeElement, eventName)
       .pipe(map(this.stripDefault));
   }
 
