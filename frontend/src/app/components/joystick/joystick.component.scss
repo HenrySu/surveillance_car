@@ -4,15 +4,15 @@ $mounting-plate-size :140px;
 $stick-handle-size:$mounting-plate-size/2.5;
 
 %joystickBase {
-  position: absolute;
-  display: block;
+  display:flex;
   border-radius: $border-radius;
   background-size: $bg-size;
 }
 
 .joystickPad {
   position: relative;
-  display: block;
+  display:block;
+  flex-basis: auto;
 
   .mountingPlate {
     @extend %joystickBase;
@@ -23,6 +23,7 @@ $stick-handle-size:$mounting-plate-size/2.5;
 
   .joystick {
     @extend %joystickBase;
+    position:absolute;
     width: $stick-handle-size;
     height: $stick-handle-size;
     left: ($mounting-plate-size - $stick-handle-size)/2;
