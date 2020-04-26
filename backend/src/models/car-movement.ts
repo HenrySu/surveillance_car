@@ -1,3 +1,3 @@
 export class CarMovement {
-    constructor(public xRatio: number, public yRatio: number) { }
+    constructor(public arc: number, public distanceRatio: number) { }
 }

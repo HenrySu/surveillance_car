@@ -1,5 +1,4 @@
-import { CarMovement } from "./car-movement";
-
+type Direction = "forward" | "backward";
 export class Wheel {
     static readonly DutyCycle = 150;
     constructor(private forwardPin: number,
@@ -8,15 +7,23 @@ export class Wheel {
 
     }
 
-    move(vector:CarMovement) {
-        this.setRPM(vector);
+    move(speedRatio: number) {
+        this.setSpeed(speedRatio);
+        this.setDirection(speedRatio);
     }
 
-    private setRPM(vector: CarMovement) {
-        this.getDutyCycle(vector.yRatio);
+    private setDirection(speedRatio: number): void {
+        this.getDirection(speedRatio);
     }
 
-    private getDutyCycle(ratio:number) {
+    private setSpeed(speedRatio: number): void {
+        this.getDutyCycle(speedRatio);
+    }
+
+    private getDirection(ratio: number): Direction {
+        return ratio > 0 ? "forward" : "backward";
+    }
+    private getDutyCycle(ratio: number) {
         Math.abs(ratio) * Wheel.DutyCycle;
     }
 }
