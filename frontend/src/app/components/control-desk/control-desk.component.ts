@@ -10,6 +10,7 @@ import { throttleTime } from 'rxjs/operators';
   styleUrls: ['./control-desk.component.scss']
 })
 export class ControlDeskComponent implements OnDestroy, AfterViewInit {
+  static readonly JoystickStreamThrottleTime = 150;
   @ViewChild("carSteer") carSteer: JoystickComponent;
   @ViewChild("cameraSteer") cameraSteer: JoystickComponent;
   private subscriptions: Subscription[] = [];
@@ -24,10 +25,10 @@ export class ControlDeskComponent implements OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     this.subscriptions.push(
       this.carSteer.joystickPositionPercentageVector$
-        .pipe(throttleTime(150))
+        .pipe(throttleTime(ControlDeskComponent.JoystickStreamThrottleTime))
         .subscribe(x => console.log(`car`)),
       this.cameraSteer.joystickPositionPercentageVector$
-        .pipe(throttleTime(150))
+        .pipe(throttleTime(ControlDeskComponent.JoystickStreamThrottleTime))
         .subscribe(x => console.log(`camera`)),
     );
   }
