@@ -13,9 +13,11 @@ export class CarService {
         const carConfig = <CarConfig>configSvc.get("car");
         this.car = carFactory.createCar(carConfig);
     }
-    move(moveVector: CarMovement) {
 
+    move(moveVector: CarMovement) {
+        this.car.move(moveVector);
     }
+
     getCarInfo() {
     }
 
