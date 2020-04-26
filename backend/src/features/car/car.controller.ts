@@ -13,7 +13,7 @@ export class CarController {
 
     @Post()
     async move(@Body() moveVector: CarMovement) {
-        console.log(moveVector);
         this.carSvc.move(moveVector);
+        return JSON.stringify(moveVector);
     }
 }
