@@ -54,6 +54,7 @@ export class JoystickComponent implements AfterViewInit, OnDestroy {
   private getPercentageVector(event: PointerEvent): Vector2 {
     const x = this.joystickWidth === 0 ? 0 : (event.offsetX / this.joystickWidth - 0.5) * 2;
     const y = this.joystickHeight === 0 ? 0 : (0.5 - event.offsetY / this.joystickHeight) * 2;
+
     return new Vector2(x, y);
   }
   private getEventStream<T extends Event>(nativeElement: any, eventName: string): Observable<T> {

@@ -9,9 +9,11 @@
        -1v
 */
 export class Vector2 {
-    constructor(public x:number, public y:number){}
-    // constructor(public angleRadian: number = 0, public distance: number = 0) {
-    //     this.x = Math.sin(angleRadian) * distance;
-    //     this.y = Math.cos(angleRadian) * distance;
-    // }
+  constructor(public x: number, public y: number) {
+    this.arc = (Math.atan2(x, y) + 2 * Math.PI) % (2 * Math.PI);
+    this.distanceRatio = Math.sqrt(x * x + y * y);
+  }
+
+  public arc: number; // clockwise
+  public distanceRatio: number;//[0,1]
 }
