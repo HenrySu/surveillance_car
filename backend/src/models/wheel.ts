@@ -1,5 +1,7 @@
 export class Wheel {
-    constructor() {
-        
+    constructor(private forwardPin: number,
+        private backwardPin: number,
+        pwmPin: number) {
+
     }
 }

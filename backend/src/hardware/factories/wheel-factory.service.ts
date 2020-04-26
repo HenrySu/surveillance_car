@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Wheel } from 'src/models';
+import { WheelConfig } from '../models';
 
 @Injectable()
 export class WheelFactoryService {
-    createWheel(): Wheel {
-        return new Wheel();
+    createWheel(config: WheelConfig): Wheel {
+        return new Wheel(config.forwardPin, config.backwardPin, config.pwmPin);
     }
 }
