@@ -8,10 +8,11 @@ import { environment } from 'src/environments/environment';
 })
 export class CarService {
 
-  private readonly carRouter = `${environment.backendUrl}/car`;
+  private readonly carUrl = `${environment.backendUrl}/car`;
   constructor(private httpClient: HttpClient) { }
 
   move(vector: Vector2) {
-    return this.httpClient.post<Vector2>(this.carRouter, vector);
+    console.log(this.carUrl);
+    return this.httpClient.post<Vector2>(this.carUrl, vector).subscribe(x => console.log(x));
   }
 }

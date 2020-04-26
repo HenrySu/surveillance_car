@@ -8,6 +8,7 @@ import { NgJoystickModule } from "ng-joystick";
 import { ControlDeskComponent } from './components/control-desk/control-desk.component';
 import { MonitorComponent } from './components/monitor/monitor.component';
 import { JoystickComponent } from './components/joystick/joystick.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { JoystickComponent } from './components/joystick/joystick.component';
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
-    NgJoystickModule
+    NgJoystickModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
