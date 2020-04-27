@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Car } from 'src/models';
-import { CarConfig } from '../models';
+import { CarConfig } from '../configs';
 import { WheelFactoryService } from './wheel-factory.service';
 
 @Injectable()

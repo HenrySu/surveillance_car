@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Wheel } from 'src/models';
-import { WheelConfig } from '../models';
+import { WheelConfig } from '../configs';
 
 @Injectable()
 export class WheelFactoryService {
