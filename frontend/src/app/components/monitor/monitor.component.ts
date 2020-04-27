@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-monitor',
@@ -6,9 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./monitor.component.scss']
 })
 export class MonitorComponent implements OnInit {
-  @Input() monitorUrl: string;
-  @Input() width: number;
-  @Input() height: number;
+  @Input() width: number = 400;
+  @Input() height: number = 400;
+  monitorUrl: string = environment.cameraUrl;
 
   constructor() { }
 

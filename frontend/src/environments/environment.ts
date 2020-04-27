@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   backendUrl:'http://192.168.50.10:3000',
+  cameraUrl:'http://192.168.50.10:8081'
 };
 
 /*
