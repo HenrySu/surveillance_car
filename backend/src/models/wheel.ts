@@ -3,7 +3,7 @@ import Gpio = pigpio.Gpio;
 
 type Direction = "forward" | "backward";
 export class Wheel {
-    static readonly DutyCycle = 150;
+    static readonly DutyCycle = 255;
     private forwardGpio:Gpio;
     private backwardGpio:Gpio;
     private pwmGpio:Gpio;
@@ -42,6 +42,6 @@ export class Wheel {
         return ratio > 0 ? "forward" : "backward";
     }
     private getDutyCycle(ratio: number):number {
-        return Math.abs(ratio) * Wheel.DutyCycle;
+        return Math.floor(Math.abs(ratio) * Wheel.DutyCycle);
     }
 }

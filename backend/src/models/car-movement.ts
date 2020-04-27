@@ -1,3 +1,6 @@
-export class CarMovement {
-    constructor(public arc: number, public distanceRatio: number) { }
+export interface CarMovement {
+    arc: number;
+    distanceRatio: number;
+    x: number;
+    y: number;
 }

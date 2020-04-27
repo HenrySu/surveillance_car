@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, ValidationPipe } from '@nestjs/common';
 import { CarService } from './car.service';
 import { CarMovement } from 'src/models/car-movement';
 
@@ -12,8 +12,8 @@ export class CarController {
     }
 
     @Post()
-    async move(@Body() moveVector: CarMovement) {
+    async move(@Body() moveVector:CarMovement) {
         this.carSvc.move(moveVector);
-        return JSON.stringify(moveVector);
+        return moveVector;
     }
 }
