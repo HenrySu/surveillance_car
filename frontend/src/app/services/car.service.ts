@@ -12,6 +12,6 @@ export class CarService {
   constructor(private httpClient: HttpClient) { }
 
   move(vector: Vector2) {
-    this.httpClient.post<Vector2>(this.carUrl, vector).subscribe();
+    this.httpClient.post(this.carUrl, vector).subscribe();
   }
 }
