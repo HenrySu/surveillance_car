@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from "@nestjs/config";
 import { CarFactoryService } from 'src/hardware/factories/car-factory.service';
 import { Car } from 'src/models';
-import { CarMovement } from 'src/models/car-movement';
+import { MovementVector2 } from 'src/models/movement-vector2';
 import { CarConfig } from 'src/hardware/models';
 
 @Injectable()
@@ -14,7 +14,7 @@ export class CarService {
         this.car = carFactory.createCar(carConfig);
     }
 
-    move(moveVector: CarMovement) {
+    move(moveVector: MovementVector2) {
         this.car.move(moveVector);
     }
 
