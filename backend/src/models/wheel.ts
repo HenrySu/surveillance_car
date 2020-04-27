@@ -1,4 +1,3 @@
-import { DigitalOutput } from "raspi-gpio";
 import * as pigpio from "pigpio";
 import Gpio = pigpio.Gpio;
 
