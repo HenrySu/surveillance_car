@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, Output, Renderer2, ViewChild, RendererStyleFlags2 } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, Output, Renderer2, ViewChild, RendererStyleFlags2, Input } from '@angular/core';
 import { fromEvent, merge, Observable } from 'rxjs';
-import { endWith, map, switchMapTo, takeUntil } from 'rxjs/operators';
+import { endWith, map, switchMapTo, takeUntil, throttleTime } from 'rxjs/operators';
 import { Vector2 } from 'src/app/models';
 
 @Component({
@@ -11,6 +11,7 @@ import { Vector2 } from 'src/app/models';
 export class JoystickComponent implements AfterViewInit, OnDestroy {
   @ViewChild("joystickHandle") private joystickHandleElement: ElementRef;
   @Output() public joystickPositionPercentageVector$: Observable<Vector2>;
+  @Input() public throttleTime:number = 100;
   private unSubscribeVector: any;
   private get handleElement() {
     return this.joystickHandleElement.nativeElement;
@@ -43,6 +44,7 @@ export class JoystickComponent implements AfterViewInit, OnDestroy {
       .pipe(map(event => this.getPercentageVector(event)));
     this.joystickPositionPercentageVector$ = joystickStart$.pipe(
       switchMapTo(joystickVector$.pipe(
+        throttleTime(this.throttleTime),
         takeUntil(joystickStop$),
         endWith(new Vector2(0, 0)//the stop vector
         )))

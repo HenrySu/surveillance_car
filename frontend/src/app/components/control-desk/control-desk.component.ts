@@ -2,7 +2,6 @@ import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CameraService, CarService } from 'src/app/services';
 import { JoystickComponent } from '../joystick/joystick.component';
-import { throttleTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-control-desk',
@@ -25,10 +24,8 @@ export class ControlDeskComponent implements OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     this.subscriptions.push(
       this.carSteer.joystickPositionPercentageVector$
-        .pipe(throttleTime(ControlDeskComponent.JoystickStreamThrottleTime))
         .subscribe(vector => this.carSvc.move(vector)),
       this.cameraSteer.joystickPositionPercentageVector$
-        .pipe(throttleTime(ControlDeskComponent.JoystickStreamThrottleTime))
         .subscribe(x => console.log(`camera`)),
     );
   }
