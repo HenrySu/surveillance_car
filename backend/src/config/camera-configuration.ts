@@ -5,13 +5,13 @@ export default () => ({
             channelNum: 1,
             minDutyCyclePercentage: .01,
             maxDutyCyclePercentage: .15,
-            defaultDutyCyclePercentage: .08
+            defaultAngle: Math.PI / 2
         },
         verticalServo: {
             channelNum: 2,
             minDutyCyclePercentage: .01,
             maxDutyCyclePercentage: .1,
-            defaultDutyCyclePercentage: .01
+            defaultAngle: 0
         },
     }
 })

@@ -14,5 +14,6 @@ export class MonitorService {
     }
 
     move(moveVector: MovementVector2) {
+        this.camera.move(moveVector);
     }
 }
