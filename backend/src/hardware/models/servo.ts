@@ -5,18 +5,22 @@ export class Servo {
     private _angle: number;
     set angle(value: number) {
         // clap angle to [0,180] as servo only serves that range
-        this._angle = Math.max(Math.min(value, 180), 0);
+        this._angle = this.clapAngle(value);
         this.pwm.setDutyCycle(this.channelNum, this.getDutyCycle(), 0);
     }
 
     constructor(private channelNum: number,
-        private minDutyCyclePercentage:number,
-        private maxDutyCyclePercentage:number,
+        private minDutyCyclePercentage: number,
+        private maxDutyCyclePercentage: number,
         private pwm: PCA9685Driver,
         private angleStep: number = 5) {
         this._angle = 90;
     }
 
+    clapAngle(value: number): number {
+        return Math.max(Math.min(value, 180), 0);
+    }
+    
     increaseAngle() {
         this.angle = this.angle + this.angleStep;
     }
