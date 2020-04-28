@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-monitor',
@@ -10,7 +11,9 @@ export class MonitorComponent implements OnInit {
   @Input() width: number;
   @Input() height: number;
 
-  constructor() { }
+  constructor() {
+    this.monitorUrl = environment.cameralUrl;
+   }
 
   ngOnInit(): void {
   }
