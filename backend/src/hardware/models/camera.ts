@@ -9,7 +9,7 @@ export class Camera {
     vecticalServo: Servo;
 
     constructor(i2cPin: number, horizontalPin: number, verticalPin: number) {
-        this.pwm = new PCA9685Driver(
+        const pwm = new PCA9685Driver(
             {
                 i2c: i2cBus.openSync(1),
                 address: i2cPin,
@@ -19,7 +19,7 @@ export class Camera {
                 throw err;
             });
 
-        this.horizontalServo = new Servo(horizontalPin);
-        this.vecticalServo = new Servo(verticalPin);
+        this.horizontalServo = new Servo(horizontalPin, pwm);
+        this.vecticalServo = new Servo(verticalPin, pwm);
     }
 }
