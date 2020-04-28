@@ -13,6 +13,7 @@ export class PCA9685FactoryService {
                 frequency: 50,
                 debug: false
             }, function (err) {
+                console.log(`initializing pca9685 failed, err: ${err}`);
                 throw err;
             });
     }
