@@ -10,6 +10,7 @@ export class MonitorService {
     constructor(configSvc: ConfigService,
         factory: CameraFactoryService) {
         const cameraConfig = <CameraConfig>configSvc.get("camera");
+        console.log(cameraConfig)
         this.camera = factory.createCamera(cameraConfig);
     }
 
