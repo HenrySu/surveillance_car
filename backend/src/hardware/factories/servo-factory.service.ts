@@ -9,7 +9,7 @@ export class ServoFactoryService {
         return new Servo(config.channelNum,
             config.minDutyCyclePercentage,
             config.maxDutyCyclePercentage,
-            config.defaultDutyCyclePercentage,
+            config.defaultAngle,
             pwm);
     }
 }

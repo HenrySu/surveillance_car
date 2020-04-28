@@ -2,36 +2,42 @@ import * as pca9685 from "pca9685";
 import PCA9685Driver = pca9685.Pca9685Driver;
 
 export class Servo {
-    private _angle: number;
-    set angle(value: number) {
-        // clap angle to [0,180] as servo only serves that range
-        this._angle = this.clapAngle(value);
-        this.pwm.setDutyCycle(this.channelNum, this.getDutyCycle(), 0);
-    }
+    private _angleRadian: number;
+    private static minAngle: number = 0;
+    private static maxAngle: number = Math.PI;
+
 
     constructor(private channelNum: number,
         private minDutyCyclePercentage: number,
         private maxDutyCyclePercentage: number,
-        private defaultDutyCyclePercentage: number,
+        private defaultAngle: number,
         private pwm: PCA9685Driver,
         private angleStep: number = 5) {
-        this._angle = this.defaultDutyCyclePercentage;
+        this.updateAngle(this.defaultAngle);
+    }
+
+    updateAngle(newAngle: number) {
+        this._angleRadian = this.clapAngle(newAngle);
+        const anglePercentage = this.getAnglePercentage(this._angleRadian);
+        const dutyCyclePercentage = this.getDutyCyclePercentage(anglePercentage);
+        this.pwm.setDutyCycle(this.channelNum, dutyCyclePercentage, 0);
+    }
+
+    getDutyCyclePercentage(anglePercentage: number) {
+        return anglePercentage * (this.maxDutyCyclePercentage - this.minDutyCyclePercentage) + this.minDutyCyclePercentage;
     }
 
     clapAngle(value: number): number {
-        return Math.max(Math.min(value, 180), 0);
+        return Math.max(Math.min(value, Servo.maxAngle), Servo.minAngle);
     }
 
-    increaseAngle() {
-        this.angle = this.angle + this.angleStep;
+    getAnglePercentage(angle: number): number {
+        return (angle - Servo.minAngle) / (Servo.maxAngle - Servo.minAngle);
     }
 
-    decreaseAngle() {
-        this.angle = this.angle - this.angleStep;
-    }
-
-    getDutyCycle(): number {
-        return 0;
+    //ratio value range : [-1, 1], - means move to opposite direction
+    move(ratio: number) {
+        this.updateAngle(this.angleStep * ratio + this._angleRadian);
     }
 
 }
