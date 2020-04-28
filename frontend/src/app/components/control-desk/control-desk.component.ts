@@ -25,10 +25,8 @@ export class ControlDeskComponent implements OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     this.subscriptions.push(
       this.carSteer.joystickPositionPercentageVector$
-        .pipe(throttleTime(ControlDeskComponent.JoystickStreamThrottleTime))
         .subscribe(vector => this.carSvc.move(vector)),
       this.cameraSteer.joystickPositionPercentageVector$
-        .pipe(throttleTime(ControlDeskComponent.JoystickStreamThrottleTime))
         .subscribe(vector => this.cameraSvc.move(vector)),
     );
   }
