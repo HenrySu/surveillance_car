@@ -12,7 +12,7 @@ export class MonitorComponent implements OnInit {
   @Input() height: number;
 
   constructor() {
-    this.monitorUrl = environment.cameralUrl;
+    this.monitorUrl = environment.cameraUrl;
    }
 
   ngOnInit(): void {
