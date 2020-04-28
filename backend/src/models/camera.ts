@@ -1,3 +1,3 @@
 export class Camera {
-    constructor(i2cPin: string, horizontalPin: number, verticalPin: number) { }
+    constructor(i2cPin: number, horizontalPin: number, verticalPin: number) { }
 }
