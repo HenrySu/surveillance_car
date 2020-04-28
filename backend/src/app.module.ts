@@ -10,6 +10,8 @@ import { MonitorService } from './features/monitor/monitor.service';
 import { CameraFactoryService } from './hardware/factories/camera-factory.service';
 import { CarFactoryService } from './hardware/factories/car-factory.service';
 import { WheelFactoryService } from './hardware/factories/wheel-factory.service';
+import { ServoFactoryService } from './hardware/factories/servo-factory.service';
+import { PCA9685FactoryService } from './hardware/factories/pca9685-factory.service';
 
 @Module({
   imports: [
@@ -17,6 +19,6 @@ import { WheelFactoryService } from './hardware/factories/wheel-factory.service'
       load: [carConfiguration, cameraConfiguration]
     })],
   controllers: [AppController, CarController, MonitorController],
-  providers: [AppService, CarService, MonitorService, CarFactoryService, WheelFactoryService, CameraFactoryService],
+  providers: [AppService, CarService, MonitorService, CarFactoryService, WheelFactoryService, CameraFactoryService, ServoFactoryService, PCA9685FactoryService],
 })
 export class AppModule { }
