@@ -7,12 +7,11 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./monitor.component.scss']
 })
 export class MonitorComponent implements OnInit {
-  @Input() monitorUrl: string;
-  @Input() width: number;
-  @Input() height: number;
+  @Input() monitorUrl: string = environment.cameraUrl;
+  @Input() width: number = 400;
+  @Input() height: number = 400;
 
   constructor() {
-    this.monitorUrl = environment.cameraUrl;
    }
 
   ngOnInit(): void {
