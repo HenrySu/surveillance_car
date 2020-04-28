@@ -1,7 +1,15 @@
 export default () => ({
     camera: {
         i2cAddress: 0x40d,
-        horizontalPin: 1,
-        verticalPin: 2
+        verticalServo: {
+            channelNum: 1,
+            minDutyCyclePercentage: .01,
+            maxDutyCyclePercentage: .15
+        },
+        horizontalServo: {
+            channelNum: 2,
+            minDutyCyclePercentage: .01,
+            maxDutyCyclePercentage: .1
+        },
     }
 })
