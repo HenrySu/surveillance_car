@@ -5,6 +5,6 @@ import { CameraConfig } from '../configs';
 @Injectable()
 export class CameraFactoryService {
     createCamera(config: CameraConfig): Camera{
-        return new Camera(config.i2cAddress, config.horizontalPin, config.verticalPin);
+        return new Camera(config.i2cAddress, config.horizontalServo, config.verticalServo);
     }
 }
