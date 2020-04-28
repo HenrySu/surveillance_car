@@ -12,15 +12,16 @@ export class Servo {
     constructor(private channelNum: number,
         private minDutyCyclePercentage: number,
         private maxDutyCyclePercentage: number,
+        private defaultDutyCyclePercentage: number,
         private pwm: PCA9685Driver,
         private angleStep: number = 5) {
-        this._angle = 90;
+        this._angle = this.defaultDutyCyclePercentage;
     }
 
     clapAngle(value: number): number {
         return Math.max(Math.min(value, 180), 0);
     }
-    
+
     increaseAngle() {
         this.angle = this.angle + this.angleStep;
     }
