@@ -10,6 +10,8 @@ export class Servo {
     }
 
     constructor(private channelNum: number,
+        private minDutyCyclePercentage:number,
+        private maxDutyCyclePercentage:number,
         private pwm: PCA9685Driver,
         private angleStep: number = 5) {
         this._angle = 90;
