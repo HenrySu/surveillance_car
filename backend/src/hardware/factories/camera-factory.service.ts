@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Camera } from 'src/models';
+import { Camera } from 'src/hardware/models';
 import { CameraConfig } from '../configs';
 
 @Injectable()

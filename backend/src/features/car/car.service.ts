@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from "@nestjs/config";
 import { CarFactoryService } from 'src/hardware/factories/car-factory.service';
-import { Car } from 'src/models';
-import { MovementVector2 } from 'src/models/movement-vector2';
+import { Car } from 'src/hardware/models';
+import { MovementVector2 } from 'src/hardware/models/movement-vector2';
 import { CarConfig } from 'src/hardware/configs';
 
 @Injectable()

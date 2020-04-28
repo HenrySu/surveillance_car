@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Car } from 'src/models';
+import { Car } from 'src/hardware/models';
 import { CarConfig } from '../configs';
 import { WheelFactoryService } from './wheel-factory.service';
 

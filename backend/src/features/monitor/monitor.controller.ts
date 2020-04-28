@@ -1,6 +1,6 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { MonitorService } from './monitor.service';
-import { MovementVector2 } from 'src/models';
+import { MovementVector2 } from 'src/hardware/models';
 
 @Controller('monitor')
 export class MonitorController {

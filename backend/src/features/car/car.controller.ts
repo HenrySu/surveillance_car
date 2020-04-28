@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, ValidationPipe } from '@nestjs/common';
 import { CarService } from './car.service';
-import { MovementVector2 } from 'src/models/movement-vector2';
+import { MovementVector2 } from 'src/hardware/models/movement-vector2';
 
 @Controller('car')
 export class CarController {
