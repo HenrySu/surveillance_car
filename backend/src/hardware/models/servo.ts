@@ -12,7 +12,7 @@ export class Servo {
         private maxDutyCyclePercentage: number,
         private defaultAngle: number,
         private pwm: PCA9685Driver,
-        private angleStep: number = 5) {
+        private angleStep: number = Math.PI / 9) {
         this.updateAngle(this.defaultAngle);
     }
 
@@ -35,9 +35,14 @@ export class Servo {
         return (angle - Servo.minAngle) / (Servo.maxAngle - Servo.minAngle);
     }
 
+    stop() {
+        this.pwm.setDutyCycle(this.channelNum, 0, 0);
+    }
     //ratio value range : [-1, 1], - means move to opposite direction
     move(ratio: number) {
-        this.updateAngle(this.angleStep * ratio + this._angleRadian);
+        ratio === 0
+            ? this.stop()
+            : this.updateAngle(this.angleStep * ratio + this._angleRadian);
     }
 
 }
