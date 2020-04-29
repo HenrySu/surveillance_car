@@ -12,7 +12,7 @@ export class Servo {
         private maxDutyCyclePercentage: number,
         private defaultAngle: number,
         private pwm: PCA9685Driver,
-        private angleStep: number = Math.PI / 9) {
+        private angleStep: number = Math.PI / 30) {
         this.updateAngle(this.defaultAngle);
     }
 
