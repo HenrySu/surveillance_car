@@ -9,6 +9,7 @@ import { ControlDeskComponent } from './components/control-desk/control-desk.com
 import { MonitorComponent } from './components/monitor/monitor.component';
 import { JoystickComponent } from './components/joystick/joystick.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     MaterialModule,
     NgJoystickModule,
-    HttpClientModule
+    HttpClientModule,
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
