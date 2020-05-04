@@ -11,7 +11,8 @@ export class LoginPageComponent implements OnInit {
     username: "",
     password: ""
   });
-
+  errorMessage = "";
+  
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {

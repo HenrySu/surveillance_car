@@ -9,7 +9,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-const materialModules = [MatInputModule,
+const materialModules = [
+  MatInputModule,
   MatCardModule,
   MatButtonModule,
   MatSidenavModule,
