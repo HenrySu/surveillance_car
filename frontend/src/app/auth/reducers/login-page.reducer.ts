@@ -1,6 +1,8 @@
 import { createReducer, on } from "@ngrx/store";
 import { LoginPageActions } from "../actions";
 
+export const featureKey = "loginPage";
+
 export interface State {
     pending: boolean;
     errorMessage: string;
