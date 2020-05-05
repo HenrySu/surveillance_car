@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from "@angular/forms";
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgJoystickModule } from "ng-joystick";
+import { StoreModule } from '@ngrx/store';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './auth/auth.module';
 import { AppComponent } from './components/app/app.component';
@@ -25,11 +25,11 @@ import { MaterialModule } from './material';
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
-    NgJoystickModule,
     HttpClientModule,
     ReactiveFormsModule,
     AuthModule,
     AppRoutingModule,
+    StoreModule.forRoot({}, {}),
   ],
   providers: [],
   bootstrap: [AppComponent]
