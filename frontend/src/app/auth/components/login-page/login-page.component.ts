@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Store } from "@ngrx/store";
+import * as fromAuth from "../../reducers";
+import * as authActions from "../../actions";
+import { Credentials } from '../../models';
 
 @Component({
   selector: 'app-login-page',
@@ -12,13 +16,14 @@ export class LoginPageComponent implements OnInit {
     password: ""
   });
   errorMessage = "";
-  
-  constructor(private fb: FormBuilder) { }
+
+  constructor(private fb: FormBuilder,
+    private store: Store<fromAuth.State>) { }
 
   ngOnInit(): void {
   }
 
   submit(): void {
-
+    this.store.dispatch(authActions.LoginPageActions.loginAction(this.form.value));
   }
 }
