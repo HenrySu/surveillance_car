@@ -1,1 +1,1 @@
-export * from "./login-page.actions";
+export * as LoginPageActions from "./login-page.actions";
