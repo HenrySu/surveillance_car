@@ -15,6 +15,7 @@ export const reducer = createReducer(initialState,
     on(LoginPageActions.loginAction,
         state => ({
             ...state,
-            pending: true
+            pending: true,
+            errorMessage: ""
         }))
 );
