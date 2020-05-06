@@ -5,4 +5,4 @@ export enum LoginPageActionTypes {
     Login = "[Login Page] Login",
 }
 
-export const loginAction = createAction(LoginPageActionTypes.Login, props<{ credentials: Credentials }>());
+export const login = createAction(LoginPageActionTypes.Login, props<{ credentials: Credentials }>());
