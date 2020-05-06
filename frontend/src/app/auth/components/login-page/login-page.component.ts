@@ -24,6 +24,6 @@ export class LoginPageComponent implements OnInit {
 
   submit(): void {
     this.form.valid
-      && this.store.dispatch(LoginPageActions.login(this.form.value));
+      && this.store.dispatch(LoginPageActions.login({ credentials: this.form.value }));
   }
 }
