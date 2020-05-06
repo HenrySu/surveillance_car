@@ -19,5 +19,12 @@ export const reducer = createReducer(initialState,
             ...state,
             pending: true,
             errorMessage: ""
-        }))
+        })),
+
+
+    on(LoginPageActions.login,
+        state => {
+            console.log('www')
+            return state;
+        })
 );
