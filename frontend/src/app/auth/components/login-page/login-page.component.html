@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-title>Login</mat-card-title>
   <mat-card-content>
-    <form [formGroup]="form" (ngSumbit)="submit()">
+    <form [formGroup]="form" (ngSubmit)="submit()">
       <section id="username">
         <mat-form-field>
           <input type="text" placeholder="Username" formControlName="username" matInput>

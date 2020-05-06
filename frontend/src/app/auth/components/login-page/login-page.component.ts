@@ -23,6 +23,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   submit(): void {
+    console.log('sumbit');
     this.store.dispatch(LoginPageActions.login(this.form.value));
   }
 }
