@@ -10,10 +10,17 @@ export class AuthService {
   constructor() { }
 
   login(credentials: Credentials): Observable<LoginResult> {
+    if(credentials.username === "henry"){
+      return of({
+        isOK:true,
+        errorMessage:"",
+        token:"whatever"
+      })
+    }
     return of({
-      isOK: true,
-      errorMessage: "",
-      token: `${credentials.username}-whatever-token`
+      isOK:false,
+      errorMessage: "username or password is invalid",
+      token: ``
     });
   }
 }

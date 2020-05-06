@@ -10,14 +10,16 @@ import * as fromAuth from "../../reducers";
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit {
+  constructor(private fb: FormBuilder,
+    private store: Store<fromAuth.State>) { }
+
   form: FormGroup = this.fb.group({
     username: ["", Validators.required],
     password: ["", Validators.required]
   });
-  errorMessage = "";
 
-  constructor(private fb: FormBuilder,
-    private store: Store<fromAuth.State>) { }
+  errorMessage$ = this.store.select(fromAuth.selectLoginPageErrorMsg);
+
 
   ngOnInit(): void {
   }
