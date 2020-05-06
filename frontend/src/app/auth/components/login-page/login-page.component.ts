@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from "@ngrx/store";
 import { LoginPageActions } from "../../actions";
 import * as fromAuth from "../../reducers";
@@ -11,8 +11,8 @@ import * as fromAuth from "../../reducers";
 })
 export class LoginPageComponent implements OnInit {
   form: FormGroup = this.fb.group({
-    username: "",
-    password: ""
+    username: ["", Validators.required],
+    password: ["", Validators.required]
   });
   errorMessage = "";
 
@@ -23,7 +23,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   submit(): void {
-    console.log('sumbit');
-    this.store.dispatch(LoginPageActions.login(this.form.value));
+    this.form.valid
+      && this.store.dispatch(LoginPageActions.login(this.form.value));
   }
 }
