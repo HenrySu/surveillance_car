@@ -12,7 +12,7 @@ export const initialState: State = {
     token: ""
 }
 
-export const reducers = createReducer(
+export const reducer = createReducer(
     initialState,
     on(AuthApiActions.loginResponse,
         (state, loginResponse) => {
