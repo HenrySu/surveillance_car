@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from "@ngrx/store";
+import { LoginPageActions } from "../../actions";
 import * as fromAuth from "../../reducers";
-import * as authActions from "../../actions";
-import { Credentials } from '../../models';
 
 @Component({
   selector: 'app-login-page',
@@ -24,6 +23,6 @@ export class LoginPageComponent implements OnInit {
   }
 
   submit(): void {
-    this.store.dispatch(authActions.LoginPageActions.loginAction(this.form.value));
+    this.store.dispatch(LoginPageActions.login(this.form.value));
   }
 }

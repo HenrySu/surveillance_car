@@ -1,4 +1,4 @@
-import { createAction } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
+import { LoginResult } from '../models';
 
-export const loginSuccess = createAction("[Auth API] Login success");
-export const loginFail = createAction("[Auth API] Login failure");
+export const loginResponse = createAction("[Auth API] Login result", props<LoginResult>());

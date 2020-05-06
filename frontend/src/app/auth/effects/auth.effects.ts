@@ -18,7 +18,7 @@ export class AuthEffects {
                 exhaustMap((credentials: Credentials) =>
                     this.authSvc.login(credentials)
                         .pipe(
-                            map(loginRes => AuthApiActions.loginSuccess()),
+                            map(loginRes => AuthApiActions.loginResponse(loginRes)),
                         )
                 )
             )
