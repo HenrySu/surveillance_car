@@ -1,8 +1,7 @@
 import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { CameraService, CarService } from 'src/app/services';
+import { CameraService, CarService } from 'src/app/car/services';
 import { JoystickComponent } from '../joystick/joystick.component';
-import { throttleTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-control-desk',

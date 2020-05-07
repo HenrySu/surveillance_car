@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, Output, Renderer2, ViewChild, RendererStyleFlags2 } from '@angular/core';
 import { fromEvent, merge, Observable } from 'rxjs';
 import { endWith, map, switchMapTo, takeUntil } from 'rxjs/operators';
-import { Vector2 } from 'src/app/models';
+import { Vector2 } from 'src/app/car/models';
 
 @Component({
   selector: 'app-joystick',
