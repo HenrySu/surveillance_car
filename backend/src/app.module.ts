@@ -12,12 +12,16 @@ import { CarFactoryService } from './hardware/factories/car-factory.service';
 import { WheelFactoryService } from './hardware/factories/wheel-factory.service';
 import { ServoFactoryService } from './hardware/factories/servo-factory.service';
 import { PCA9685FactoryService } from './hardware/factories/pca9685-factory.service';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       load: [carConfiguration, cameraConfiguration]
-    })],
+    }),
+    AuthModule,
+    UsersModule],
   controllers: [AppController, CarController, MonitorController],
   providers: [AppService, CarService, MonitorService, CarFactoryService, WheelFactoryService, CameraFactoryService, ServoFactoryService, PCA9685FactoryService],
 })
