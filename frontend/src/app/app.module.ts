@@ -16,6 +16,7 @@ import { JoystickComponent } from './components/joystick/joystick.component';
 import { MonitorComponent } from './components/monitor/monitor.component';
 import { MaterialModule } from './material';
 import { metaReducers } from "./reducers";
+import { CarModule } from './car';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { metaReducers } from "./reducers";
     HttpClientModule,
     ReactiveFormsModule,
     AuthModule,
+    CarModule,
     AppRoutingModule,
     StoreModule.forRoot({}, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
