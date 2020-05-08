@@ -1,17 +1,17 @@
 import { Wheel } from "./wheel";
-import { CarMovement } from "./car-movement";
+import { MovementVector2 } from "./movement-vector2";
 
 export class Car {
     constructor(private leftWheel: Wheel, private rightWheel: Wheel) {
     }
 
-    move(vector: CarMovement): void {
+    move(vector: MovementVector2): void {
         const [leftRatio, rightRatio] = this.getLeftRightRatios(vector);
         this.leftWheel.move(leftRatio * vector.distanceRatio);
         this.rightWheel.move(rightRatio * vector.distanceRatio);
     }
 
-    getLeftRightRatios(vector: CarMovement) {
+    getLeftRightRatios(vector: MovementVector2) {
         const moveRatio = Math.cos(vector.arc);
         const turnRatio = Math.sin(vector.arc);
         let [leftRatio, rightRatio] = [moveRatio, moveRatio];

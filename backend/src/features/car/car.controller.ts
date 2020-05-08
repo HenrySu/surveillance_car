@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, ValidationPipe } from '@nestjs/common';
 import { CarService } from './car.service';
-import { CarMovement } from 'src/models/car-movement';
+import { MovementVector2 } from 'src/hardware/models/movement-vector2';
 
 @Controller('car')
 export class CarController {
@@ -12,7 +12,7 @@ export class CarController {
     }
 
     @Post()
-    async move(@Body() moveVector:CarMovement) {
+    async move(@Body() moveVector:MovementVector2) {
         this.carSvc.move(moveVector);
         return moveVector;
     }
