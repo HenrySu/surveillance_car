@@ -1,6 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
 import { AuthApiActions } from '../actions';
-import { loginResponse } from '../actions/auth-api.actins';
 
 export const featureKey = "Auth";
 
@@ -14,17 +13,15 @@ export const initialState: State = {
 
 export const reducer = createReducer(
     initialState,
-    on(AuthApiActions.loginResponse,
-        (state, loginResponse) => {
-            if (loginResponse.isOK) {
-                return {
-                    ...state,
-                    token: loginResponse.token
-                };
-            }
-            return {
+    on(AuthApiActions.loginSucceed,
+        (state, loginResponse) =>
+            ({
                 ...state,
-                token: ""
-            };
-        }),
+                token: loginResponse.token
+            })),
+    on(AuthApiActions.loginFailed,
+        (state, err) => ({
+            ...state,
+            token: "",
+        })),
 );

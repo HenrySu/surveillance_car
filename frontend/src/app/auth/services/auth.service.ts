@@ -17,7 +17,6 @@ export class AuthService {
     return this.http.post(this.loginUrl, credentials)
       .pipe(
         map((res: LoginResponse) => <LoginResult>{ isOK: true, errorMessage: "", token: res.accessToken }),
-        catchError((err: HttpErrorResponse) => of({ isOK: false, errorMessage: "Either username or password incorrect.", token: "" }))
       );
   }
 }

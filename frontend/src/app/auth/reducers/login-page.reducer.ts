@@ -1,6 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { LoginPageActions, AuthApiActions } from "../actions";
-import { loginResponse } from '../actions/auth-api.actins';
+import { AuthApiActions, LoginPageActions } from "../actions";
 
 export const featureKey = "loginPage";
 
@@ -22,20 +21,16 @@ export const reducer = createReducer(initialState,
             errorMessage: ""
         })),
 
-    on(AuthApiActions.loginResponse,
-        (state, loginResponse) => {
-            if (loginResponse.isOK) {
-                return {
-                    ...state,
-                    errorMessage: "",
-                    pending: false,
-                }
-            }
+    on(AuthApiActions.loginSucceed,
+        (state, res) => ({
+            ...state,
+            errorMessage: "",
+            pending: false,
+        })),
 
-            return {
-                ...state,
-                errorMessage: loginResponse.errorMessage,
-                pending: false,
-            }
-        })
+    on(AuthApiActions.loginFailed, (state, error) => ({
+        ...state,
+        errorMessage: error.errorMessage,
+        pending: false,
+    })),
 );
