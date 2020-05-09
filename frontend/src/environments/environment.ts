@@ -1,11 +1,13 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
+const backendUrl = 'http://192.168.50.10:3000/';
 
 export const environment = {
   production: false,
-  backendUrl:'http://192.168.50.10:3000',
-  cameraUrl:'http://192.168.50.10:8081',
+  carUrl: `${backendUrl}car`,
+  monitorUrl: `${backendUrl}monitor`,
+  videoUrl:'http://192.168.50.10:8081',
 };
 
 /*

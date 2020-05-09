@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CameraService {
-  private readonly monitorUrl = `${environment.backendUrl}/monitor`;
+  private readonly monitorUrl = environment.monitorUrl;
   constructor(private httpClient: HttpClient) { }
 
   move(vector: Vector2): Observable<any> {

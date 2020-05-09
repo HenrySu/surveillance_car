@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./monitor.component.scss']
 })
 export class MonitorComponent implements OnInit {
-  monitorUrl: string = environment.cameraUrl;
+  monitorUrl: string = environment.videoUrl;
   @Input() width: number = 320;
   @Input() height: number = 240;
 

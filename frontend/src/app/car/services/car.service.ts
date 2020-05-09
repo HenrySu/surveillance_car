@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class CarService {
 
-  private readonly carUrl = `${environment.backendUrl}/car`;
+  private readonly carUrl = environment.carUrl;
   constructor(private httpClient: HttpClient) { }
 
   move(vector: Vector2): Observable<any> {
