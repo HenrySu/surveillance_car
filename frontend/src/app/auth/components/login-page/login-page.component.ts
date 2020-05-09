@@ -19,9 +19,10 @@ export class LoginPageComponent implements OnInit {
   });
 
   errorMessage$ = this.store.select(fromAuth.selectLoginPageErrorMsg);
-
+  pending$ = this.store.select(fromAuth.selectLoginPagePending);
 
   ngOnInit(): void {
+    this.pending$.subscribe(pending => pending ? this.form.disable() : this.form.enable());
   }
 
   submit(): void {
