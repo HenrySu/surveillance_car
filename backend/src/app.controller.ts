@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Request, UseGuards, Req } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthService } from './auth/auth.service';
-import { LocalAuthGuard } from './auth/guards';
+import { LocalAuthGuard, JwtAuthGuard } from './auth/guards';
 
 @Controller()
 export class AppController {
@@ -17,5 +17,11 @@ export class AppController {
   @Post()
   login(@Request() req) {
     return this.authSvc.login(req.user);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  getUser(@Request() req) {
+    return req.user;
   }
 }
