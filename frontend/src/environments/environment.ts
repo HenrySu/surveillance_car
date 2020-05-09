@@ -7,6 +7,7 @@ export const environment = {
   production: false,
   carUrl: `${backendUrl}car`,
   monitorUrl: `${backendUrl}monitor`,
+  loginUrl: `${backendUrl}login`,
   videoUrl:'http://192.168.50.10:8081',
 };
 
