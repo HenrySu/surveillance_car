@@ -5,7 +5,7 @@ import { UsersModule } from 'src/users/users.module';
 import { AuthService } from './auth.service';
 import { jwtConstants } from './constants';
 import { LocalAuthGuard } from './guards';
-import { LocalStragety } from './stragety.local';
+import { LocalStragety } from './local.stragety';
 
 @Module({
   providers: [AuthService, LocalStragety, LocalAuthGuard],
