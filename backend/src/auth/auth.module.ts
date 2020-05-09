@@ -23,7 +23,7 @@ import { JwtStrategy, LocalStrategy } from './strategies';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configSvc: ConfigService) => ({
-        secretOrPrivateKey: configSvc.get<string>("Jwt_Secret"),
+        secretOrPrivateKey: configSvc.get<string>("JWT_SECRET"),
         signOptions: { expiresIn: "12h" },
       }),
     })
